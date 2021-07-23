@@ -10,7 +10,7 @@
 # MAGIC In the high level diagram, we will work in the highlighted section:
 # MAGIC 
 # MAGIC 
-# MAGIC <img src="files/users/sergio.ballesteros@databricks.com/arch_demo_1.png" width="1000"/>
+# MAGIC <img src="https://github.com/sergioballesterossolanas/databricks-ab-testing/blob/master/img/arch_2.png?raw=true" width="1000"/>
 
 # COMMAND ----------
 
