@@ -1,6 +1,6 @@
 # Databricks notebook source
 # MAGIC %md
-# MAGIC # ML Training
+# MAGIC # ML model training
 # MAGIC The goal of this notebook is to load the German Credit Data dataset and train a machine learning model on it. 
 # MAGIC 
 # MAGIC The machine learning model will be able to predict the risk of providing loans to different people.
