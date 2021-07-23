@@ -3,7 +3,7 @@
 # MAGIC ## Computing metrics
 # MAGIC Great, now we have a table were we store the predictions and a table where we have the ground truth of the users who received predictions (we can assume that there is such a feedback loop).
 # MAGIC 
-# MAGIC <img src="files/users/sergio.ballesteros@databricks.com/arch_demo_3.png" width="1000"/>
+# MAGIC <img src="https://github.com/sergioballesterossolanas/databricks-ab-testing/blob/master/img/arch_4.png?raw=true" width="1000"/>
 # MAGIC 
 # MAGIC 
 # MAGIC In this notebook we are going to compare the predictions with the actual responses for the models A and B over time. We will compute the Precision Recall AUC in 1 minute buckets.
