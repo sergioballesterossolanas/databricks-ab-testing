@@ -8,7 +8,7 @@
 # MAGIC - The two models trained previously (models A and B) that are registered on MLflow
 # MAGIC - The streaming Delta table created before
 # MAGIC 
-# MAGIC <img src="files/users/sergio.ballesteros@databricks.com/arch_demo_2.png" width="1000"/>
+# MAGIC <img src="https://github.com/sergioballesterossolanas/databricks-ab-testing/blob/master/img/arch_3.png?raw=true" width="1000"/>
 # MAGIC 
 # MAGIC 
 # MAGIC When the streaming data comes in, 50% of the data will go on the fly to model A and 50% to model B. The predictions would be served in a streaming fashion to a client, perhaps with a Kafka server, although that is not included in this demo, but we should how easy it would be. What we do instead is to save these predictions in a Delta table. This table will later on be used to compute the quality metrics using the ground truth, and we will display it in Databricks SQL.
