@@ -1,7 +1,7 @@
 # Databricks notebook source
 # MAGIC %md
 # MAGIC # Download the dataset
-# MAGIC <img src="https://thumbs.dreamstime.com/b/credit-risk-message-bubble-word-cloud-collage-business-concept-background-credit-risk-message-bubble-word-cloud-collage-business-216251701.jpg" width="400"/>
+# MAGIC <img src="https://thumbs.dreamstime.com/b/credit-risk-message-bubble-word-cloud-collage-business-concept-background-credit-risk-message-bubble-word-cloud-collage-business-216251701.jpg" width="600"/>
 # MAGIC 
 # MAGIC This notebook will download the German Credit Risk dataset:
 # MAGIC 
