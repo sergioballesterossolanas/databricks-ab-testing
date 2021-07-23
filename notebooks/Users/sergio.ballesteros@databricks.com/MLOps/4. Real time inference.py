@@ -18,12 +18,34 @@
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC # Read the streaming data
+# MAGIC # Load the models
+# MAGIC Once we have registered our models we can see them in the MLflow UI. Note the version numbers of your models. In this case we will use versions 5 and 6, although for you these might be different. You can change this in the next cell.
+# MAGIC 
+# MAGIC <img src="https://github.com/sergioballesterossolanas/databricks-ab-testing/blob/master/img/model_versions.png?raw=true" width="1000"/>
 
 # COMMAND ----------
 
 import pyspark.sql.functions as F
 import mlflow
+
+model_a_version = 5
+model_b_version = 6
+model_name = "german_credit"
+
+model_a = mlflow.spark.load_model(
+  model_uri=f"models:/{model_name}/{model_a_version}" # Logistic regression model
+)
+
+model_b = mlflow.spark.load_model(
+  model_uri=f"models:/{model_name}/{model_b_version}" # Gradient boosting
+)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC # Read the streaming data
+
+# COMMAND ----------
 
 df = (
   spark
@@ -71,23 +93,6 @@ df_b = (
 )
 
 display(df_a.union(df_b))
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC ## Load the two registered models for A/B testing
-
-# COMMAND ----------
-
-model_name = "german_credit"
-
-model_a = mlflow.spark.load_model(
-  model_uri=f"models:/{model_name}/5" # Logistic regression model
-)
-
-model_b = mlflow.spark.load_model(
-  model_uri=f"models:/{model_name}/6" # Gradient boosting
-)
 
 # COMMAND ----------
 
