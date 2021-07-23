@@ -75,7 +75,7 @@ display(df_metrics)
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC # Save metrics to a Delta Table
+# MAGIC # Save metrics to a Delta Table and visualize them with Databricks SQL
 
 # COMMAND ----------
 
@@ -84,7 +84,11 @@ df_metrics.write.mode("overwrite").format("delta").saveAsTable("risk_metrics")
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC #See the dashboard on Databricks SQL https://e2-demo-west.cloud.databricks.com/sql/dashboards/02566bf1-3ecd-4d63-b3ba-b6ccf859a530-risk-demo
+# MAGIC ### See the dashboard on Databricks SQL 
+# MAGIC 
+# MAGIC ### https://e2-demo-west.cloud.databricks.com/sql/dashboards/02566bf1-3ecd-4d63-b3ba-b6ccf859a530-risk-demo
+# MAGIC 
+# MAGIC <img src="https://github.com/sergioballesterossolanas/databricks-ab-testing/blob/master/img/sql_dashboard.png?raw=true" width="1300"/>
 
 # COMMAND ----------
 
