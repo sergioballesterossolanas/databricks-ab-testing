@@ -13,7 +13,7 @@
 # MAGIC 
 # MAGIC When the streaming data comes in, 50% of the data will go on the fly to model A and 50% to model B. The predictions would be served in a streaming fashion to a client, perhaps with a Kafka server, although that is not included in this demo, but we should how easy it would be. What we do instead is to save these predictions in a Delta table. This table will later on be used to compute the quality metrics using the ground truth, and we will display it in Databricks SQL.
 # MAGIC 
-# MAGIC <img src="/files/users/sergio.ballesteros@databricks.com/Screenshot_2021_06_24_at_11_32_17.png"/>
+# MAGIC <img src="https://github.com/sergioballesterossolanas/databricks-ab-testing/blob/master/img/abtesting.png?raw=true"/>
 
 # COMMAND ----------
 
