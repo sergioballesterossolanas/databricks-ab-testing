@@ -32,7 +32,7 @@ from pandas_profiling import ProfileReport
 from pyspark.sql import SparkSession
 
 spark = (SparkSession.builder
-            .config("spark.jars.packages", "org.mlflow:mlflow-spark:1.11.0")
+            .config("spark.jars.packages", "org.mlflow:mlflow-spark:1.17.0")
             .master("local[*]")
             .getOrCreate())
 
