@@ -1,4 +1,32 @@
 # Databricks notebook source
+# MAGIC %md ---
+# MAGIC title: A/B testing with MLflow 1 - Introduction
+# MAGIC authors:
+# MAGIC -  Sergio Ballesteros
+# MAGIC tags:
+# MAGIC - machine-learning
+# MAGIC - python
+# MAGIC - pyspark
+# MAGIC - a/b testin
+# MAGIC - ab testing
+# MAGIC - binary-classifier
+# MAGIC - mllib
+# MAGIC - credit risk
+# MAGIC - loan risk
+# MAGIC - finance
+# MAGIC created_at: 2021-07-27
+# MAGIC updated_at: 2021-07-27
+# MAGIC tldr: Introduction to the A/B testing series of notebooks. Shows how to leverage Databricks with MLflow and Delta to do A/B testing on streaming credit risk data
+# MAGIC ---
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC # Notebook Links
+# MAGIC - AWS demo.cloud: [https://e2-demo-west.cloud.databricks.com/?o=2556758628403379](https://e2-demo-west.cloud.databricks.com/?o=2556758628403379)
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC # Introduction
 # MAGIC In any machine learning related project, training a model offline is just one part of the process. In 2020, we saw how the whole world quickly changed due to the pandemic. When working with data that represents the outside world is it important to keep in mind that models are going to have different accuracies over time because the data used for that training might no longer be representative, also known as model drift. Hence, it is important to track the real world accuracy over time. 
@@ -37,12 +65,9 @@
 # MAGIC 
 # MAGIC https://www.kaggle.com/uciml/german-credit
 # MAGIC 
+# MAGIC A preview of the data is available here https://github.com/sergioballesterossolanas/databricks-ab-testing/blob/master/german_credit_data.csv
+# MAGIC 
 # MAGIC We will save the data in the *german_credit_data* Delta table
-
-# COMMAND ----------
-
-# MAGIC %sh
-# MAGIC wget https://raw.githubusercontent.com/sergioballesterossolanas/databricks-ab-testing/master/german_credit_data.csv -O /dbfs/tmp/german_credit_data.csv
 
 # COMMAND ----------
 
@@ -54,7 +79,7 @@ df = (
   .option("inferSchema", "true") 
   .option("header", "true") 
   .option("sep", ",") 
-  .csv("/tmp/german_credit_data.csv")
+  .csv("/mnt/databricks-datasets-private/ML/credit-risk/german_credit_data.csv")
 )
 
 df.write.format("delta").mode("overwrite").saveAsTable(permanent_table_name)
@@ -62,3 +87,6 @@ df.write.format("delta").mode("overwrite").saveAsTable(permanent_table_name)
 # COMMAND ----------
 
 display(spark.read.table(permanent_table_name))
+
+# COMMAND ----------
+
