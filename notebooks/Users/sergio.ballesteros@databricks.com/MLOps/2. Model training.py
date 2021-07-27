@@ -1,6 +1,6 @@
 # Databricks notebook source
 # MAGIC %md ---
-# MAGIC title: A/B testing with MLflow 1 - Model training
+# MAGIC title: A/B testing with MLflow 2 - Model training
 # MAGIC authors:
 # MAGIC -  Sergio Ballesteros
 # MAGIC tags:
@@ -16,7 +16,7 @@
 # MAGIC - finance
 # MAGIC created_at: 2021-07-27
 # MAGIC updated_at: 2021-07-27
-# MAGIC tldr: Introduction to the A/B testing series of notebooks. Shows how to leverage Databricks with MLflow and Delta to do A/B testing on streaming credit risk data
+# MAGIC tldr: Trains two machine learning models on a credit risk dataset. A/B testing will be done on these two notebooks with online inference.
 # MAGIC ---
 
 # COMMAND ----------
