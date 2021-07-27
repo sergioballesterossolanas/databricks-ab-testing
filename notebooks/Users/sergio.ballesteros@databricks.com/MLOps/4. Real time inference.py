@@ -1,4 +1,32 @@
 # Databricks notebook source
+# MAGIC %md ---
+# MAGIC title: A/B testing with MLflow 4 - Real time inference
+# MAGIC authors:
+# MAGIC -  Sergio Ballesteros
+# MAGIC tags:
+# MAGIC - machine-learning
+# MAGIC - python
+# MAGIC - pyspark
+# MAGIC - a/b testin
+# MAGIC - ab testing
+# MAGIC - binary-classifier
+# MAGIC - mllib
+# MAGIC - credit risk
+# MAGIC - loan risk
+# MAGIC - finance
+# MAGIC created_at: 2021-07-27
+# MAGIC updated_at: 2021-07-27
+# MAGIC tldr: Loads two trained ML models and performs online inference on a stream of data coming from a Delta table. Predictions will be used for the A/B test.
+# MAGIC ---
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC # Notebook Links
+# MAGIC - AWS demo.cloud: [https://e2-demo-west.cloud.databricks.com/?o=2556758628403379](https://e2-demo-west.cloud.databricks.com/?o=2556758628403379)
+
+# COMMAND ----------
+
 # MAGIC %md 
 # MAGIC ## Real time risk prediciton with A/B testing
 # MAGIC 
@@ -158,6 +186,3 @@ dbutils.fs.rm("/FileStore/tmp/streaming_ckpnt_risk_demo", recurse=True)
 # COMMAND ----------
 
 display(spark.readStream.table("risk_stream_predictions"))
-
-# COMMAND ----------
-
