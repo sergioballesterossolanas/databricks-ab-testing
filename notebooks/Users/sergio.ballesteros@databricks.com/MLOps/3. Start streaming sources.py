@@ -1,4 +1,32 @@
 # Databricks notebook source
+# MAGIC %md ---
+# MAGIC title: A/B testing with MLflow 3 - Start streaming sources
+# MAGIC authors:
+# MAGIC -  Sergio Ballesteros
+# MAGIC tags:
+# MAGIC - machine-learning
+# MAGIC - python
+# MAGIC - pyspark
+# MAGIC - a/b testin
+# MAGIC - ab testing
+# MAGIC - binary-classifier
+# MAGIC - mllib
+# MAGIC - credit risk
+# MAGIC - loan risk
+# MAGIC - finance
+# MAGIC created_at: 2021-07-27
+# MAGIC updated_at: 2021-07-27
+# MAGIC tldr: Creates a streaming source of credit requests using Delta.
+# MAGIC ---
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC # Notebook Links
+# MAGIC - AWS demo.cloud: [https://e2-demo-west.cloud.databricks.com/?o=2556758628403379](https://e2-demo-west.cloud.databricks.com/?o=2556758628403379)
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC # Live Stream
 # MAGIC <img src="https://tdwi.org/articles/2017/08/07/-/media/TDWI/TDWI/BITW/datapipeline.jpg" width="700"/>
