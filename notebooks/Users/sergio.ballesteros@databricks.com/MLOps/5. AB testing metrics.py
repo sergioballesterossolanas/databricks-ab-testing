@@ -26,6 +26,9 @@ from sklearn.metrics import precision_recall_curve
 from sklearn.metrics import auc
 from pyspark.sql.functions import pandas_udf, PandasUDFType
 import pandas as pd
+from scipy.stats import mannwhitneyu
+from datetime import datetime
+import pyspark.sql.types as T
 
 # COMMAND ----------
 
@@ -74,8 +77,77 @@ display(df_metrics)
 
 # COMMAND ----------
 
+display(df_metrics.groupby("group").mean("pr_auc"))
+
+# COMMAND ----------
+
 # MAGIC %md
-# MAGIC # Save metrics to a Delta Table and visualize them with Databricks SQL
+# MAGIC # Statistical test
+# MAGIC We can see that the model A has a lower PR AUC than the model B. We will use the Wilcoxon-Mann-Whitney test to check if this difference is statistically significant.
+# MAGIC 
+# MAGIC https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html
+
+# COMMAND ----------
+
+
+model_a_metric = df_metrics.where(F.col("group") == "A").select("pr_auc").toPandas()["pr_auc"].values
+model_b_metric = df_metrics.where(F.col("group") == "B").select("pr_auc").toPandas()["pr_auc"].values
+
+# Check if model B is better than model A
+b_better_a = mannwhitneyu(
+  x=model_a_metric,
+  y=model_b_metric,
+  alternative="less" # The distribution of the PR AUC of A is less than the PR AUC of B
+)
+
+# Check if model A is better than model B
+a_better_b = mannwhitneyu(
+  x=model_a_metric,
+  y=model_b_metric,
+  alternative="greater" # The distribution of the PR AUC of A is less than the PR AUC of B
+)
+
+print("Test model B better than model A", b_better_a)
+print("Test model A better than model B", a_better_b)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC We can see that the p-values of our hypothesis are only 0.17 and 0.84. Typically the maximum p-value to accept a hypothesis would be 0.05, so we could say that no model is statistically significant superior
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC # Save metrics and tests to a Delta Table and visualize them with Databricks SQL
+
+# COMMAND ----------
+
+if (a_better_b[1] < 0.05) and (b_better_a[1] > 0.05):
+  best_model = "A"
+  p_value = float(a_better_b[1])
+elif (a_better_b[1] > 0.05) and (b_better_a[1] > 0.05):
+  best_model = None
+  p_value = None
+elif (a_better_b[1] > 0.05) and (b_better_a[1] < 0.05):
+  best_model = "B"
+  p_value = float(b_better_a[1])
+else:
+  raise ValueError("Statistical test failed")
+
+# COMMAND ----------
+
+df_pvalue  = spark.createDataFrame(data, T.StructType([
+  T.StructField("best_model", T.StringType()),
+  T.StructField("timestamp", T.TimestampType()),
+  T.StructField("pvalue", T.FloatType())]
+))
+(
+  df_pvalue
+ .write
+ .mode("overwrite")
+ .format("delta")
+ .saveAsTable("credit_risk_ab_testing")
+)
 
 # COMMAND ----------
 
@@ -89,6 +161,3 @@ df_metrics.write.mode("overwrite").format("delta").saveAsTable("risk_metrics")
 # MAGIC ### https://e2-demo-west.cloud.databricks.com/sql/dashboards/02566bf1-3ecd-4d63-b3ba-b6ccf859a530-risk-demo
 # MAGIC 
 # MAGIC <img src="https://github.com/sergioballesterossolanas/databricks-ab-testing/blob/master/img/sql_dashboard.png?raw=true" width="1300"/>
-
-# COMMAND ----------
-
