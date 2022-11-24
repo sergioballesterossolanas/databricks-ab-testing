@@ -16,7 +16,7 @@
 # MAGIC - finance
 # MAGIC created_at: 2021-07-27
 # MAGIC updated_at: 2021-07-27
-# MAGIC tldr: Introduction to the A/B testing series of notebooks. This series of notebooks shows how to leverage Databricks with MLflow and Delta to do A/B testing on streaming data related to credit risk
+# MAGIC tldr: Introduction to the A/B testing series of notebooks. Shows how to leverage Databricks with MLflow and Delta to do A/B testing on streaming credit risk data
 # MAGIC ---
 
 # COMMAND ----------
